@@ -1,4 +1,6 @@
-package DE;
+package projectDE;
+
+
 
 public class TSphere implements IFunction{
     private double fOpt;

@@ -1,4 +1,6 @@
-package DE;
+package projectDE;
+
+
 
 public class TRastrigin implements IFunction{
     private double fOpt;

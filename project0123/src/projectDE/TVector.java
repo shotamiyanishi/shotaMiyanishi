@@ -1,4 +1,6 @@
-package DE;
+package projectDE;
+
+
 
 public class TVector {
     private double[] fVector;

@@ -1,4 +1,5 @@
-package DE;
+package projectDE;
+
 
 import java.util.Random;
 
