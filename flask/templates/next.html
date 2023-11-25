@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{%block title%}
+{{title}}
+{%endblock%}
+
+{%block headline%}
+{{title}}
+{%endblock%}
+
+{%block contents%}
+{{message}}
+{{data}}<br>
+{{test}}
+<form method = "post" action = "/hello">
+    <input type = "text" name = "send" value = {{send}}>
+    <input type = "submit">
+</form>
+{%endblock%}
+
+{%block footer%}
+{{foot}}
+{%endblock%}
