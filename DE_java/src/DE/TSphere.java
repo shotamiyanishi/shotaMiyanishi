@@ -13,7 +13,7 @@ public class TSphere implements IFunction{
 
     public double evaluate(TVector vec) {
         double eval = 0.0;
-        for (int i = 0;i<fDimension;i++) {
+        for (int i = 0; i < fDimension; i++) {
             eval += (vec.getArray()[i] - fOpt) * (vec.getArray()[i] - fOpt); 
         }
         return eval;

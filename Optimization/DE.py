@@ -1,20 +1,6 @@
 import numpy as np
 import copy
-import pandas as pd
-
-
-def sphere(x):
-    eval = float (((x - 3.0) * (x - 3.0)).sum())
-    return eval
-
-def OriginalRastrigin(x):
-    value  = 0
-    n = x.shape[0]
-    for i in range(n):
-        value +=  (x[i] - 3.0)**2 - 10 * np.cos(2 * np.pi * (x[i] - 3.0))
-
-    value += 10  * n
-    return value
+from benchmarks import Sphere, Rastrigin, RozenBlock
     
 class solution:
     def __init__(self, dim):
@@ -154,7 +140,7 @@ class DE:
     
 de = DE(pop_size = 50, dim = 10, max = 5.0, min = -5.0, seed = 0)
 
-function = sphere
+function = Sphere
 de.initialize_population(function = function)
 sols = []
 for i in range(100):

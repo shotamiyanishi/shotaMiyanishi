@@ -1,27 +1,7 @@
 import numpy as np
 import math
 
-
-def OriginalRastrigin(x):
-    value  = 0
-    n = x.shape[0]
-    for i in range(n):
-        value +=  (x[i] - 3.0)**2 - 10 * np.cos(2 * np.pi * (x[i] - 3.0))
-
-    value += 10  * n
-    return value
-
-def RozenBlock(x):
-    dim = x.shape[0]
-    value = 0.0
-    for i in range(dim - 1):
-        value += 100.0 * (x[i + 1] - x[i] ** 2) ** 2 + (x[i] - 1.0) ** 2
-    return value  
-
-
-def sphere(x):
-    eval = float (((x - 5.0) * (x - 5.0)).sum())
-    return eval
+from benchmarks import Sphere, Rastrigin, RozenBlock
 
 def evaluate(func, poplation):
     pop_size = len(poplation)
@@ -152,9 +132,6 @@ class cmaes:
         if tmp < self.Eta_cmu:
             self.Eta_cmu = tmp
 #--------------------------------------------------------------------------------------------------------------
-        #計算用の行列，ベクトル
-        self.vecter = np.zeros(dim)
-        self.matrix = np.eye(dim)
         
     #個体のサンプリングを行う．     
     def sampling(self):
@@ -235,11 +212,11 @@ class cmaes:
     def get_m(self):
         return self.m
     
-dim = 100
+dim = 20
 pop_size = int(4 + 3 * np.log(dim))
 es = cmaes(dim = dim, pop_size = pop_size, m = 0.0, sigma = 5.0, seed = 3)
 
-for itr in range(1):
+for itr in range(10000):
     es.sampling()
     evaluate(func = RozenBlock, poplation = es.get_population())
     es.do_one_generation()

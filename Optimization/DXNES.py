@@ -1,25 +1,6 @@
-import pandas as pd
 import numpy as np
 
-def OriginalRastrigin(x):
-    value  = 0
-    n = x.shape[0]
-    for i in range(n):
-        value +=  (x[i] - 3.0)**2 - 10 * np.cos(2 * np.pi * (x[i] - 3.0))
-
-    value += 10  * n
-    return value
-
-def RozenBlock(x):
-    dim = x.shape[0]
-    value = 0.0
-    for i in range(dim - 1):
-        value += 100.0 * (x[i + 1] - x[i] ** 2) ** 2 + (x[i] - 1.0) ** 2
-    return value  
-
-def sphere(x):
-    eval = float (((x - 5.0) * (x - 5.0)).sum())
-    return eval
+from benchmarks import Sphere, Rastrigin, RozenBlock
 
 def evaluate(func, poplation):
     pop_size = len(poplation)
@@ -285,11 +266,11 @@ class dxnes:
     def get_m(self):
         return self.m
     
-dim = 50
-nes = dxnes(dim = dim, pop_size = 1000, m = 5.0, sigma = 5.0, seed = 0)
+dim = 10
+nes = dxnes(dim = dim, pop_size = 50, m = 5.0, sigma = 5.0, seed = 0)
 
 for itr in range(100):
     nes.sampling()
-    evaluate(func = sphere, poplation = nes.get_population())
+    evaluate(func = Sphere, poplation = nes.get_population())
     nes.do_one_generation()
     print(nes.get_best_solution())
