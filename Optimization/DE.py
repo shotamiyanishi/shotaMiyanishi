@@ -140,9 +140,8 @@ class DE:
     
 de = DE(pop_size = 50, dim = 10, max = 5.0, min = -5.0, seed = 0)
 
-function = Sphere
+function = Rastrigin
 de.initialize_population(function = function)
-sols = []
-for i in range(100):
+for i in range(1000):
     de.do_one_generation(function = function)
     print(de.get_best_solution())

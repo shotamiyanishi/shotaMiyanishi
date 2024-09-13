@@ -269,7 +269,7 @@ class dxnes:
 dim = 10
 nes = dxnes(dim = dim, pop_size = 50, m = 5.0, sigma = 5.0, seed = 0)
 
-for itr in range(100):
+for itr in range(1000):
     nes.sampling()
     evaluate(func = Sphere, poplation = nes.get_population())
     nes.do_one_generation()
