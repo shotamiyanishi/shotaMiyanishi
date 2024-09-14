@@ -182,16 +182,13 @@ class cmaes:
         tmp = self.p_c.reshape(self.dim, 1)
         self.C = (1.0 - self.Eta_c1 - self.Eta_cmu) * self.C + self.Eta_c1 * np.dot(tmp, tmp.T) + self.Eta_cmu * matrix        
         
-        #コレスキー分解を行い行列を保存する
+        #共分散行列Cに対してコレスキー分解を行い行列Bを保存する.(C = BB^T)
         self.B = np.linalg.cholesky(self.C)
-        
-        print(self.m)
-        
+                
         #ステップサイズσの更新
         self.sigma = self.sigma * np.exp((self.c_sigma / self.d_sigma) * ((np.linalg.norm(self.p_sigma) / self.X_d) - 1.0))
         
-        
-        
+    #探索を1世代進める．
     def do_one_generation(self):
         self.sort()
         self.calc_dy_dz()
@@ -212,13 +209,25 @@ class cmaes:
     def get_m(self):
         return self.m
     
-dim = 25
-#集団サイズの推奨値は4 + int(math.ceil(3 * np.log(dim)))
-pop_size = 4 + int(math.ceil(3 * np.log(dim)))
-es = cmaes(dim = dim, pop_size = pop_size, m = 3.0, sigma = 5.0, seed = 0)
 
-for itr in range(10000):
-    es.sampling()
-    evaluate(func = RozenBlock, poplation = es.get_population())
-    es.do_one_generation()
-    print(es.get_best_solution())
+#---------------------------------パラメータ----------------------------------------------
+dim = 25 #次元数(決定変数の数)
+pop_size = 4 + int(math.ceil(3 * np.log(dim))) #集団サイズ：推奨値は4 + int(math.ceil(3 * np.log(dim)))
+m = 3.0 #探索開始時の平均ベクトル 例：m = 3.0のとき，m = [3.0, 3.0, ...,3.0]^{dim}から探索を開始
+sigma = 5.0 #探索開始時の標準偏差
+seed = 0 #乱数シード(結果の再現性のため)
+
+func = RozenBlock #解きたいタスク
+
+iteration = 100000 #反復回数
+#------------------------------------------------------------------------------------------
+
+#インスタンスの初期化
+es = cmaes(dim = dim, pop_size = pop_size, m = m, sigma = sigma, seed = seed)
+
+#以下のループ内で探索を行う．
+for itr in range(iteration):
+    es.sampling() #解のサンプリング
+    evaluate(func = func, poplation = es.get_population()) #各解の評価値の計算
+    es.do_one_generation() #探索を1世代進める
+    print(es.get_best_solution()) #現世代における最良解の出力

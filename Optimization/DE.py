@@ -137,11 +137,25 @@ class DE:
     
     def get_sorted_solutions(self):
         return sorted(self.population)
-    
-de = DE(pop_size = 50, dim = 10, max = 5.0, min = -5.0, seed = 0)
 
-function = Rastrigin
-de.initialize_population(function = function)
-for i in range(1000):
-    de.do_one_generation(function = function)
-    print(de.get_best_solution())
+#---------------------------------パラメータ----------------------------------------------
+pop_size = 100 #集団サイズ（ここは随時調整）
+dim = 20 #次元数(決定変数の数)
+max = 5.0 #集団を初期化する範囲の最大値
+min = -5.0 #集団を初期化する範囲の最小値
+seed = 0 #乱数シード(結果の再現性のため)
+
+function = RozenBlock #解きたいタスク
+
+iteration = 10000 #反復回数
+#------------------------------------------------------------------------------------------
+
+#インスタンスの初期化 
+de = DE(pop_size = pop_size, dim = dim, max = max, min = min, seed = seed)
+
+de.initialize_population(function = function) #集団を初期化し，各解の評価値の計算を行う．
+
+#以下のループ内で探索を行う．
+for i in range(iteration):
+    de.do_one_generation(function = function) #探索を1世代進める
+    print(de.get_best_solution()) #現世代における最良解の出力
