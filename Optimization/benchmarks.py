@@ -1,14 +1,16 @@
 import numpy as np
 
+#最適解[0, ..., 0]^n 評価値0
 def Rastrigin(x):
     value  = 0
     n = x.shape[0]
     for i in range(n):
-        value +=  (x[i] - 3.0)**2 - 10 * np.cos(2 * np.pi * (x[i] - 3.0))
+        value +=  (x[i])**2 - 10 * np.cos(2 * np.pi * (x[i]))
 
     value += 10  * n
     return value
 
+#最適解[1, ..., 1]^n 評価値0
 def RozenBlock(x):
     dim = x.shape[0]
     value = 0.0
@@ -16,7 +18,7 @@ def RozenBlock(x):
         value += 100.0 * (x[i + 1] - x[i] ** 2) ** 2 + (x[i] - 1.0) ** 2
     return value  
 
-
+#最適解[0, ..., 0]^n 評価値0
 def Sphere(x):
-    eval = float (((x - 5.0) * (x - 5.0)).sum())
+    eval = float (((x) * (x)).sum())
     return eval

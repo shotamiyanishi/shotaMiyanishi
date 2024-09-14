@@ -138,8 +138,8 @@ class cmaes:
         for i in range(self.pop_size):
             z = np.random.normal(0.0, 1.0, self.dim)
             self.population[i].z = z
-            self.population[i].y = np.real(np.dot(self.B, z))
-            self.population[i].x = self.sigma *  np.real(np.dot(self.B, z)) + self.m
+            self.population[i].y = np.dot(self.B, z)
+            self.population[i].x = self.sigma *  np.dot(self.B, z) + self.m
                         
     #集団内の個体をソートする
     def sort(self): 
@@ -212,9 +212,10 @@ class cmaes:
     def get_m(self):
         return self.m
     
-dim = 20
-pop_size = int(4 + 3 * np.log(dim))
-es = cmaes(dim = dim, pop_size = pop_size, m = 0.0, sigma = 5.0, seed = 3)
+dim = 25
+#集団サイズの推奨値は4 + int(math.ceil(3 * np.log(dim)))
+pop_size = 4 + int(math.ceil(3 * np.log(dim)))
+es = cmaes(dim = dim, pop_size = pop_size, m = 3.0, sigma = 5.0, seed = 0)
 
 for itr in range(10000):
     es.sampling()
