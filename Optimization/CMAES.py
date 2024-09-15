@@ -41,7 +41,7 @@ class solution:
     def get_y(self):
         return self.y
     
-    def set_z(self, y):
+    def set_y(self, y):
         self.y = y
     
     def get_z(self):
@@ -137,9 +137,9 @@ class cmaes:
     def sampling(self):
         for i in range(self.pop_size):
             z = np.random.normal(0.0, 1.0, self.dim)
-            self.population[i].z = z
-            self.population[i].y = np.dot(self.B, z)
-            self.population[i].x = self.sigma *  np.dot(self.B, z) + self.m
+            self.population[i].set_z(z)
+            self.population[i].set_y(np.dot(self.B, z))
+            self.population[i].set_x(self.sigma *  np.dot(self.B, z) + self.m)
                         
     #集団内の個体をソートする
     def sort(self): 
