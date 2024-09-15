@@ -49,9 +49,9 @@ class solution:
         self.eval_aim = eval
     
 class DE:
-    #突然変異率
+    #スケール因子[0, 2]
     F = 0.5
-    #交叉率
+    #交叉率[0,1]
     CR = 0.75
     
     def __init__(self, pop_size, dim, seed, max, min):
