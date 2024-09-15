@@ -67,15 +67,16 @@ class DE:
         
         #交叉に用いるインデックスを求めるのに使うリスト
         self.all_list = []
+        
+        #集団を保持するリスト
+        self.population = []
+        
+        #交叉に用いるインデックスと集団の初期化
         for i in range(self.pop_size):
             self.all_list.append(i)
-        
-        #集団の保持
-        self.population = []
-        for _ in range(pop_size):
             sol = solution(dim)
             self.population.append(sol)
-        
+                
         #次元数
         self.dim = dim
         
