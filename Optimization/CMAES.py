@@ -49,13 +49,13 @@ class solution:
     
     def set_z(self, z):
         self.z = z
-    
+
+    def get_eval(self):
+        return self.eval
         
     def set_eval(self, eval):
         self.eval = eval
         
-    def get_eval(self):
-        return self.eval
     
 class cmaes:
     def __init__(self, dim, pop_size, m, sigma, seed):
