@@ -71,7 +71,7 @@ class DE:
         #集団を保持するリスト
         self.population = []
         
-        #交叉に用いるインデックスと集団の初期化
+        #交叉に用いるインデックスのリストと集団の初期化
         for i in range(self.pop_size):
             self.all_list.append(i)
             sol = solution(dim)
@@ -105,13 +105,13 @@ class DE:
             parent_2 = self.population[index_list[2]].get_vector()
             
             #突然変異ベクトルの作成
-            mutaion_vector = parent_0 + DE.F * (parent_1 - parent_2)
+            mutation_vector = parent_0 + DE.F * (parent_1 - parent_2)
             
             #比較対象のベクトルを作成する．
             aim_vec = np.zeros(self.dim)
             for j in range(self.dim):
                 if np.random.rand() < DE.CR or j == cross_index:
-                    aim_vec[j] = mutaion_vector[j]
+                    aim_vec[j] = mutation_vector[j]
                 else:
                     aim_vec[j] = self.population[i].get_vector()[j]
             
